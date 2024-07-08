@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://lc6hg04gvxqq"]
+
+[ext_resource type="Script" path="res://scripts/Player.gd" id="1_21auw"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_y67k7"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_5ha7e"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_basat"]
+height = 3.0
+radius = 0.511554
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_21auw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_y67k7")
+
+[node name="visuals" type="Node3D" parent="."]
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_5ha7e")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -0.3)
+size = Vector3(0.5, 0.1, 0.5)
+
+[node name="camera_mount" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, -6.5664e-16, 0.985748, 0.168231, 1.12065e-16, -0.168231, 0.985748, 0, 1.2, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="camera_mount"]
+transform = Transform3D(0.73, -9.72223e-09, -1.51717e-09, 9.65857e-09, 0.686471, 0.24831, -1.88032e-09, -0.24831, 0.686471, 0, 0, 0)
+spring_length = 4.0
+
+[node name="Camera3D" type="Camera3D" parent="camera_mount/SpringArm3D"]
+transform = Transform3D(1.36986, 1.81244e-08, -3.52844e-09, -1.82438e-08, 1.28818, -0.465959, -2.84696e-09, 0.465959, 1.28818, -0.0178461, -0.0182704, 3.93511)
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(0.997975, 0.00453582, -0.00228869, -0.00453528, 0.997978, 0.000242903, 0.00228977, -0.000232493, 0.997986, 0, 0, 0)
+shape = SubResource("CylinderShape3D_basat")

@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://buq3l6k23cyul"]
+
+[ext_resource type="PackedScene" uid="uid://wm67k4c4ndsb" path="res://characters/Iniya/Iniya_posed.gltf" id="1_aupku"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ci0db"]
+size = Vector3(2.99805, 0.558899, 2.37549)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kr5od"]
+size = Vector3(2.99854, 3.80978, 3.74121)
+
+[node name="Iniya" type="Node3D"]
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
+
+[node name="blockbench_export" parent="Node3D" instance=ExtResource("1_aupku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0984926, 0.0153406, -0.734316)
+
+[node name="Area3D" type="Area3D" parent="Node3D/blockbench_export"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.11384)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/blockbench_export/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000732422, 0.262874, 0.431139)
+shape = SubResource("BoxShape3D_ci0db")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D/blockbench_export"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/blockbench_export/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.002, 1.89171, 0.378)
+shape = SubResource("BoxShape3D_kr5od")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
+skeleton = NodePath("../..")

@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://o8ajjc1n5rk3"]
+
+[ext_resource type="Script" path="res://scripts/item.gd" id="1_86mu2"]
+[ext_resource type="Texture2D" uid="uid://cd2xqxt25myt8" path="res://textures/PNG/Light/texture_08.png" id="1_ryjme"]
+[ext_resource type="PackedScene" uid="uid://wn4uxxf642kd" path="res://scenes/interactable.tscn" id="3_s4bg1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4d7wi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_668wl"]
+albedo_texture = ExtResource("1_ryjme")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_0fiik"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p761d"]
+
+[node name="Item" type="Node3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.6, 0)
+script = ExtResource("1_86mu2")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+shape = SubResource("BoxShape3D_4d7wi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_668wl")
+mesh = SubResource("BoxMesh_0fiik")
+
+[node name="Interactable" parent="." instance=ExtResource("3_s4bg1")]
+
+[node name="CollisionShape3D" parent="Interactable" index="0"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+shape = SubResource("BoxShape3D_p761d")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+
+[connection signal="focused" from="Interactable" to="." method="_on_interactable_focused"]
+[connection signal="interacted" from="Interactable" to="." method="_on_interactable_interacted"]
+[connection signal="unfocused" from="Interactable" to="." method="_on_interactable_unfocused"]
+
+[editable path="Interactable"]
