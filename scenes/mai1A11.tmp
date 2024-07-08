@@ -78,4 +78,7 @@ transform = Transform3D(0.776673, 0, 0.629903, 0, 1, 0, -0.629903, 0, 0.776673, 
 
 [node name="Player" parent="." instance=ExtResource("5_2vulr")]
 
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.357334, 0.632977, -0.68677, -0.0221625, 0.740858, 0.671296, 0.933714, -0.224656, 0.278762, -7.03408, 8.13948, 2.37116)
+
 [editable path="Iniya"]
